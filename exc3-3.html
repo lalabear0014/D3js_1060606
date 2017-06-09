@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <script>
+      var svg = d3.select("body")
+                 .append("svg")
+                 .attr({
+                    "width": 3000,
+                    "height": 2000,
+                    "id": "svg" });
+      var points = "10,10 ";
+      
+      for(i=0;i<20;i++) { 
+          var num = random(20,300);
+          points = points+(10+num)+","+(10+12*i)+" ";
+          
+          svg.append("circle")
+             .attr({
+                cx: 10+num,
+                cy: 10+12*i,
+                r: 5,
+                fill: "red" });
+          svg.append("text")
+             .attr({
+                x: 10+num,
+                y: 30+12*i,
+                "text-anchor": "start",   // 靠左對齊
+                fill: "black" })
+             .text(num);
+      }
+      
+      points = points+"10,"+(10+12*20);
+      console.log(points);
+      
+      svg.append("polyline")
+             .attr({
+                points: points,
+                // fill: "rgba(0,0,0,0)",
+                fill: "transparent",
+                stroke: "black" });
+      
+      function random(N,M) {
+          return Math.floor(Math.random()*(M-N+1)+N);
+      }
+  </script>
+</body>
+</html>
